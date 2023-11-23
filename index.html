@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jogo de Adivinhação de Cores</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .opcao-cor {
+      display: inline-block;
+      margin: 5px;
+      padding: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  const coresHTML = [
+    "aliceblue", "antiquewhite", "aqua", "aquamarine", "azure", "beige", "bisque",
+    "black", "blanchedalmond", "blue", "blueviolet", "brown", "burlywood", "cadetblue",
+    "chartreuse", "chocolate", "coral", "cornflowerblue", "cornsilk", "crimson", "cyan",
+    "darkblue", "darkcyan", "darkgoldenrod", "darkgray", "darkgreen", "darkkhaki", "darkmagenta",
+    "darkolivegreen", "darkorange", "darkorchid", "darkred", "darksalmon", "darkseagreen", "darkslateblue",
+    "darkslategray", "darkturquoise", "darkviolet", "deeppink", "deepskyblue", "dimgray", "dodgerblue",
+    "firebrick", "floralwhite", "forestgreen", "fuchsia", "gainsboro", "ghostwhite", "gold",
+    "goldenrod", "gray", "green", "greenyellow", "honeydew", "hotpink", "indianred", "indigo",
+    "ivory", "khaki", "lavender", "lavenderblush", "lawngreen", "lemonchiffon", "lightblue",
+    "lightcoral", "lightcyan", "lightgoldenrodyellow", "lightgray", "lightgreen", "lightpink", "lightsalmon",
+    "lightseagreen", "lightskyblue", "lightslategray", "lightsteelblue", "lightyellow", "lime", "limegreen",
+    "linen", "magenta", "maroon", "mediumaquamarine", "mediumblue", "mediumorchid", "mediumpurple",
+    "mediumseagreen", "mediumslateblue", "mediumspringgreen", "mediumturquoise", "mediumvioletred",
+    "midnightblue", "mintcream", "mistyrose", "moccasin", "navajowhite", "navy", "oldlace", "olive",
+    "olivedrab", "orange", "orangered", "orchid", "palegoldenrod", "palegreen", "paleturquoise",
+    "palevioletred", "papayawhip", "peachpuff", "peru", "pink", "plum", "powderblue", "purple",
+    "rebeccapurple", "red", "rosybrown", "royalblue", "saddlebrown", "salmon", "sandybrown",
+    "seagreen", "seashell", "sienna", "silver", "skyblue", "slateblue", "slategray", "snow",
+    "springgreen", "steelblue", "tan", "teal", "thistle", "tomato", "turquoise", "violet",
+    "wheat", "white", "whitesmoke", "yellow", "yellowgreen"
+  ];
+
+  function selecionarSubvetorAleatorio(array, tamanhoSubvetor) {
+    const subvetor = [];
+    while (subvetor.length < tamanhoSubvetor) {
+      const corAleatoria = array[Math.floor(Math.random() * array.length)];
+      if (!subvetor.includes(corAleatoria)) {
+        subvetor.push(corAleatoria);
+      }
+    }
+    return subvetor;
+  }
+
+  const subvetorCores = selecionarSubvetorAleatorio(coresHTML, 10);
+  const corAleatoria = subvetorCores[Math.floor(Math.random() * subvetorCores.length)];
+  let tentativas = 3;
+
+  function adivinharCor() {
+    // Mostrar opções ao usuário
+    alert("Escolha uma das seguintes cores:\n" + subvetorCores.join(", "));
+
+    const palpite = prompt("Tente adivinhar a cor. Digite o nome da cor:");
+    if (palpite && palpite.toLowerCase() === corAleatoria) {
+      document.body.style.backgroundColor = corAleatoria;
+      alert("Parabéns! Você acertou a cor!");
+    } else {
+      tentativas--;
+      if (tentativas > 0) {
+        alert(`Incorreto! Você tem mais ${tentativas} tentativa(s).`);
+        adivinharCor();
+      } else {
+        alert(`Você perdeu! A cor era: ${corAleatoria}`);
+      }
+    }
+  }
+
+  alert("Bem-vindo ao Jogo de Adivinhação de Cores! Clique em OK para começar.");
+  adivinharCor();
+</script>
+
+</body>
+</html>
+
+
+
+
